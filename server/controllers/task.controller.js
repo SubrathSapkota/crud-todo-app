@@ -1,18 +1,19 @@
 import { Task } from "../models/task.module.js";
 
 const getAllTask = async (req, res) => {
-  const getTask = await Task.find();
-  res.json({ alltask: getTask });
+  await Task.find()
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
 };
 
 const createTask = async (req, res) => {
-  const setTask = await new Task({
+  const { taskName, completed } = req.body;
+  await Task.create({
     taskName: req.body.taskname,
     completed: req.body.completed,
-  });
-
-  await setTask.save();
-  res.json({ message: "Items added Successfully", setTask });
+  })
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
 };
 
 const getTask = async (req, res) => {
