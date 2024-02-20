@@ -1,15 +1,16 @@
 import express from "express";
 import {
-  getAllTask,
-  createTask,
-  updateTask,
-  getTask,
-  deleteTask,
-} from "../controllers/task.controller.js";
+  getAllTodos,
+  addTodos,
+  updateTodos,
+  deleteTodos,
+} from "../controllers/Todo.controller.js";
 
 const router = express.Router();
 
-router.route("/").get(getAllTask).post(createTask);
-router.route("/:id").get(getTask).patch(updateTask).delete(deleteTask);
+router.get("/", getAllTodos);
+router.post("/addtodo", addTodos);
+router.patch("/updatetodo", updateTodos);
+router.post("/deletetodo", deleteTodos);
 
 export { router };
